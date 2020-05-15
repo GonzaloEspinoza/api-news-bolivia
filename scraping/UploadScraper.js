@@ -17,7 +17,7 @@ async function UpdateScraper(req, res) {
     
         for (let i = 0; i < data.length; i++) {
             
-            const news = await new ArticlesNews({
+            const news = new ArticlesNews({
                 author:data[i].author,
                 title: data[i].title,
                 titleSection:Utils.removeAccents(data[i].titleSection),
