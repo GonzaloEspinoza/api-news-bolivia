@@ -9,6 +9,7 @@ const controlSectionElDeber = async (req, res, next) => {
 
     console.log(permtido)
     if (permtido) {
+        res.send({message:`Los datos seran cargados en un par de minutos: ${str}`})
         next()
     } else {
         res.status(404).send({ status: 'error', err: 'error seccion no valido', message: 'seccion no valida en la pagina del deber vuelva a intentarlo' })
