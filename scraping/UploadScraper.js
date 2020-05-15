@@ -11,7 +11,7 @@ async function UpdateScraper(req, res) {
     
 
 
-    const data = await scraper.ScraperPuppeter(section)
+    const data = scraper.ScraperPuppeter(section)
 
 
     
