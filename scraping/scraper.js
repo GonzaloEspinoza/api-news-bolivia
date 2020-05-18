@@ -132,7 +132,7 @@ const puppeteer = require('puppeteer')
 
 
             const objetoRadio ={
-                title:title,
+                title:'el deber',
                 urlRadioElDeber: urlRadioElDeber,
                 source: source
             }

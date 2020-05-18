@@ -10,9 +10,9 @@ function showNews(req, res, next){
 
 
    
-    ModelArtitlesNews.find({author:req.params.source, titleSection:req.params.section},(err, artitles)=>{
+    ModelArtitlesNews.find({author:req.params.source, titleSection:req.params.section},(err, articles)=>{
 
-        res.send(artitles)
+        res.send({articles})
 
     })
 

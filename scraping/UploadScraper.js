@@ -11,13 +11,13 @@ async function UpdateScraper(req, res) {
     
 
 
-    const data = scraper.ScraperPuppeter(section)
+    const data = await scraper.ScraperPuppeter(section)
 
 
     
         for (let i = 0; i < data.length; i++) {
             
-            const news = new ArticlesNews({
+            const news = await new ArticlesNews({
                 author:data[i].author,
                 title: data[i].title,
                 titleSection:Utils.removeAccents(data[i].titleSection),
@@ -48,7 +48,7 @@ async function UpdateScraper(req, res) {
         }
 
 
-    // res.status(200).send(data)
+    res.status(200).send(data)
 
 }
 
