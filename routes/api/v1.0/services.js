@@ -23,7 +23,10 @@ const control = require('./constrols')
 // endpoint -->http://localhost:7000/upload/news/eldeber/section=pais
 // https://eldeber.com.bo/santa-cruz    --> santa cruz, pais, economia, mundo
 
-route.get('/upload/news/eldeber/section=:section',control.controlSectionElDeber, Scraping.UpdateScraper)
+route.get('/upload/news/eldeber/section=:section',
+    control.controlSectionElDeber, 
+    Scraping.UpdateScraper
+)
 
 // enpoint -->  http://localhost:7000/scraping/upload/eldeber/radio/
 route.get('/scraping/upload/eldeber/radio',Scraping.ScrapinRadioElderber)

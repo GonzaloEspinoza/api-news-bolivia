@@ -32,7 +32,7 @@ async function UpdateScraper(req, res) {
             })
     
     
-          await  ArticlesNews.findOne({title:data[i].title},(error,noticia)=>{
+          await  ArticlesNews.findOne({title:data[i].title, titleSection:section},(error,noticia)=>{
                     if(error){ console.log(`error en la buscada ${error}`) }
                     if(!noticia){ 
                         
