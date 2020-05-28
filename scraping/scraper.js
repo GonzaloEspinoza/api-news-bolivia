@@ -117,7 +117,7 @@ const puppeteer = require('puppeteer')
    const result= (async () =>{
         const browser2 = await puppeteer.launch();
         const page2 = await browser2.newPage();
-        await page2.goto(urlElDeberRdio);
+        await page2.goto(urlElDeberRdio,{waitUntil: 'load', timeout: 15000});
         await page2.screenshot({path: 'elDeberRadio.png'})
         let data = await page2.evaluate(()=>{
 
