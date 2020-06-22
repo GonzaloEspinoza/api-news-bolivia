@@ -18,7 +18,7 @@ async function UploadScrapingElPotosi(req, res){
         
         const data = await ScrapingElPotoi.ScrapingElPotosi(Sections[i]);
 
-        for (let j = 0; j < data.length; j++) {
+        for (let j = data.length-1 ; j>=0; j--) {
             const news = await new ArticlesNews({
                 author:data[j].author,
                 title: data[j].title,

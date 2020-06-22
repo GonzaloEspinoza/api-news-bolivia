@@ -14,14 +14,14 @@ async function UpdateScraper(req, res) {
         
         const data = await scraper.ScraperPuppeter(sections[i])
     
-        for (let j = data.length-1; j>=0; j--) {
+        for (let j = data.length-1 ; j>=0 ; j--) {
             
             const news = await new ArticlesNews({
                 author:data[j].author,
                 title: data[j].title,
                 titleSection:Utils.removeAccents(data[j].titleSection),
                 country:'',
-                description:data[j].description ,
+                description:data[j].description,
                 urlImage: data[j].urlImage,
                 sobre: data[j].sobre,
                 publishedAt:data[j].publishedAt,
