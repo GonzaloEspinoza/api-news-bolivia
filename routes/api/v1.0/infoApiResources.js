@@ -31,7 +31,7 @@ function infoApiResources (req, res){
             section:'santa cruz, país, economia, mundo',
             remenber: ['https://eldeber.com.bo/santa-cruz','https://eldeber.com.bo/pais','https://eldeber.com.bo/economia','https://eldeber.com.bo/mundo'],
             scraping:[
-                'endpoint --> http://localhost:7000/upload/news/eldeber/section=pais',
+                'endpoint --> /scraping/news/upload/eldeber',
                 'enpoint directo -->  http://localhost:7000/scraping/upload/eldeber/radio/ '
             ]
 
@@ -50,9 +50,20 @@ function infoApiResources (req, res){
                     'https://correodelsur.com/cultura'
             ],
             scraping:[
-                'endpoint --> http://localhost:7000/scraping/news/upload/correodelsur/section=:section',
+                'endpoint --> http://localhost:7000/scraping/news/upload/correodelsur',
                 'enpoint directo -->  /scraping/upload/correodelsur/radio '
 
+            ]
+
+        },{
+
+            name:'El Potosi',
+            url:'https://elpotosi.net',
+            section:'local, nacional, mundo, deporte',
+            remenber: ['https://eldeber.com.bo/santa-cruz','https://eldeber.com.bo/pais','https://eldeber.com.bo/economia','https://eldeber.com.bo/mundo'],
+            scraping:[
+                'endpoint --> http://localhost:7000/scraping/news/upload/elpotosi',
+                'enpoint directo -->  no tiene radio '
             ]
 
         }

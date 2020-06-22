@@ -17,6 +17,7 @@ const puppeteer = require('puppeteer')
 
    const result= (async()=>{
         try {
+            console.log(`Ejecuntando scraping e el deber --> ${urlElDeber}`);
             const browser = await puppeteer.launch();
             const page = await browser.newPage();
             await page.goto(urlElDeber);
@@ -90,7 +91,8 @@ const puppeteer = require('puppeteer')
                 return articles
             })
             
-            console.log(data)
+            // console.log(data)
+            console.log(` OK ${data.length} articulos obtenidos --> ${urlElDeber}`)
             await browser.close()
             return data
             

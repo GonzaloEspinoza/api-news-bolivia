@@ -6,39 +6,38 @@ const Utils=require('../utils/removeAcentos')
 
 async function UpdateScraper(req, res) {
 
-    const { section='pais' } = req.params
+    // const { section='pais' } = req.params;
 
+    const sections=['pais','mundo','economia','santa-cruz'];
     
-
-
-    const data = await scraper.ScraperPuppeter(section)
-
-
+    for (let i = 0; i < sections.length; i++) {
+        
+        const data = await scraper.ScraperPuppeter(sections[i])
     
-        for (let i = 0; i < data.length; i++) {
+        for (let j = data.length-1; j>=0; j--) {
             
             const news = await new ArticlesNews({
-                author:data[i].author,
-                title: data[i].title,
-                titleSection:Utils.removeAccents(data[i].titleSection),
+                author:data[j].author,
+                title: data[j].title,
+                titleSection:Utils.removeAccents(data[j].titleSection),
                 country:'',
-                description:data[i].description ,
-                urlImage: data[i].urlImage,
-                sobre: data[i].sobre,
-                publishedAt:data[i].publishedAt,
-                urlContendDetail:data[i].urlContend,
+                description:data[j].description ,
+                urlImage: data[j].urlImage,
+                sobre: data[j].sobre,
+                publishedAt:data[j].publishedAt,
+                urlContendDetail:data[j].urlContend,
                 contenido:'',
-                source: data[i].source
+                source: data[j].source
             })
     
     
-          await  ArticlesNews.findOne({title:data[i].title, titleSection:section},(error,noticia)=>{
+          await  ArticlesNews.findOne({title:data[j].title, titleSection:sections},(error,noticia)=>{
                     if(error){ console.log(`error en la buscada ${error}`) }
                     if(!noticia){ 
                         
                         news.save(  (err, respuesta)=>{
                             if(err){console.log(err)}
-                            console.log(respuesta)
+                            console.log(respuesta.titleSection)
                         })
                     }else{
                         console.log('la noticias ya existe')
@@ -47,8 +46,9 @@ async function UpdateScraper(req, res) {
             
         }
 
+    }
 
-    res.status(200).send(data)
+    res.status(200).send({message: 'realizando scraping a el deber'})
 
 }
 

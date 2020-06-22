@@ -7,43 +7,55 @@ async function UpdateScraperCorreoSur(req, res) {
 
     const parametre = req.params.section;
 
-    const data = await scraper.scrapingCorreoSur(parametre)
+    // ArticlesNews.deleteMany({author:'correo del sur'},(err,datos)=>{
+    //     if(err){console.log('dError al eliminar los datos')}
+    //     if(datos){console.log('Se eliminaron los datos, listo para actulizar la listas nueva informacion')}
+    // })
 
+    const sections = ['local','sociedad','politica','mundo','deporte'];
 
-    for (let i = 0; i < data.length; i++) {
-        const news =await new ArticlesNews({
-            author:data[i].author,
-            title: data[i].title,
-            titleSection:data[i].titleSection,
-            country:'',
-            description:data[i].description ,
-            urlImage: data[i].urlImage,
-            sobre: data[i].sobre,
-            publishedAt:data[i].publishedAt,
-            urlContendDetail:data[i].urlContentDetail,
-            contenido:'',
-            source: data[i].source
-        })
+    for (let i = 0; i < sections.length; i++) {
 
+        const data = await scraper.scrapingCorreoSur(sections[i])
 
-       await ArticlesNews.findOne({title:data[i].title},(error,noticia)=>{
-                if(error){ console.log(`error en la buscada ${error}`) }
-                if(!noticia){ 
-                    
-                    news.save((err, respuesta)=>{
-                        if(err){console.log(err)}
-                        console.log(respuesta)
-                    })
-                }else{
-                    console.log('la noticias ya existe')
-                }
-        })
-
+        for (let j = data.length-1; j>=0; j--) {
+            const news =await new ArticlesNews({
+                author:data[j].author,
+                title: data[j].title,
+                titleSection:data[j].titleSection,
+                country:'',
+                description:data[j].description ,
+                urlImage: data[j].urlImage,
+                sobre: data[j].sobre,
+                publishedAt:data[j].publishedAt,
+                urlContendDetail:data[j].urlContentDetail,
+                contenido:'',
+                source: data[j].source
+            })
+    
+    
+           await ArticlesNews.findOne({title:data[j].title},(error,noticia)=>{
+                    if(error){ console.log(`error en la buscada ${error}`) }
+                    if(!noticia){ 
+                        
+                        news.save((err, respuesta)=>{
+                            if(err){console.log(err)}
+                            console.log(respuesta.title)
+                        })
+                    }else{
+                        console.log('la noticias ya existe')
+                    }
+            })
+    
+            
+        }
         
     }
+    
+   
 
 
-    res.status(200).send(data)
+    res.status(200).send({message:'scraping exitoso a correo del sur'})
 
 }
 

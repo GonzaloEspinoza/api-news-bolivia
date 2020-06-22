@@ -23,8 +23,7 @@ const control = require('./constrols')
 // endpoint -->http://localhost:7000/upload/news/eldeber/section=pais
 // https://eldeber.com.bo/santa-cruz    --> santa cruz, pais, economia, mundo
 
-route.get('/upload/news/eldeber/section=:section',
-    control.controlSectionElDeber, 
+route.get('/scraping/news/upload/eldeber',
     Scraping.UpdateScraper
 )
 
@@ -39,10 +38,27 @@ const uploadCorreoSur= require('../../../scraping/UploadScraperCorreoSur')
 
 // enpoint -->  http://localhost:7000/scraping/news/upload/correosur/section=:local
 // https://correodelsur.com/local   --> local, sociedad, politica, seguridad, economia, mundo
-route.get('/scraping/news/upload/correodelsur/section=:section',control.controlSectionCorreoDelSur ,uploadCorreoSur.UpdateScraperCorreoSur)
+route.get('/scraping/news/upload/correodelsur' ,uploadCorreoSur.UpdateScraperCorreoSur)
 
 // realiza un scrapin de la radio de correo del sur
 route.get('/scraping/upload/correodelsur/radio',uploadCorreoSur.uploadScrapingRadioCorreoSur)
+
+
+// :::::::::SCRAPING EL POTOSI::::::
+const ElPototosi = require('../../../scraping/UploadScrapingElPotosi');
+
+route.get('/scraping/news/upload/elpotosi',ElPototosi.UploadScrapingElPotosi)
+
+// :::::::::::::::::::::::::::::::::
+
+
+
+// scraping article detail el deber----
+// http://localhost:7000/scraping/news/detail/id=5ee3a3f7d4cc642d4c867525
+const ScrapingDetail = require('../../../scraping/scrapingDetailArtitle')
+
+route.get('/scraping/news/detail/id=:id',ScrapingDetail.DetailArtitle)
+// --------------------------------
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -54,6 +70,12 @@ route.get('/scraping/upload/correodelsur/radio',uploadCorreoSur.uploadScrapingRa
 // listar las noticias por subtitulo , el deber[santa-cruz, pais, economia, mundo]
 // listar las noticias por subtitulo , correo del sur[local, sociedad, politica, seguridad, economia, mundo]
 route.get('/show/noticias/source=:source&section=:section', ArticlesNews.showNews)
+
+
+// muestra todos los DETAILS ARTICLES de los srticulos de la pagina el deber
+const Detail = require('./ShowDetailEldeber')
+route.get('/show/deatilartitcles/eldeber/section=:section',Detail.ShowDetail)
+
 
 
 

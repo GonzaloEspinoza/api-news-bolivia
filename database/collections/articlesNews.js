@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ArticlesNews = new Schema({
     author: String,
     titleSection:{ type:String ,
-        enum:['portada','local','país', 'pais','política', 'politica','deportes', 'economia','mundo','comunicados','santa cruz', 'sociedad','seguridad']
+        enum:['portada','local','país', 'pais','política', 'politica','deportes','economía', 'economia','mundo','comunicados','santa cruz', 'sociedad','seguridad','nacional','deporte']
     },
     country:String,
     title: String,

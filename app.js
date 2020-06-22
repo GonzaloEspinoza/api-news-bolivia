@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 const ScrapingElDeber = require('./scraping/scraper')
 const scrapingCoreoDelSur = require('./scraping/scrapingCorreoSur')
+const scrapingElPotosi = require('./scraping/ScrapingElPotosi')
 
 const app = express();
 const port = process.env.PORT || 7000;
@@ -26,6 +27,11 @@ app.use('/', services)
 // ScrapingElDeber.ScrapingChreerio()
 // ScrapingElDeber.ScrapingPuppeterRadioElDeber()
 //    scrapingCoreoDelSur.scrapingCorreoSur()
+// scrapingElPotosi.ScrapingElPotosi('local');
+
+const uploadElPototis = require('./scraping/UploadScrapingElPotosi')
+// uploadElPototis.UploadScrapingElPotosi();
+
 
 
 app.listen(port,()=>{
