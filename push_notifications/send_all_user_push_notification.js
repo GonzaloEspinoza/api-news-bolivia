@@ -18,6 +18,8 @@ const SearchArtticleSendPushNot= async()=>{
     console.log(articles[0].title)
 
     const tokens = await Token.find({}).exec();
+    if(tokens.length==0)return null
+    
     console.log(tokens)
     tokens.forEach(iten => {
         SendAllPushNotification(iten.tokenUser,articles[0].title, articles[0].description, articles[0].urlImage)
