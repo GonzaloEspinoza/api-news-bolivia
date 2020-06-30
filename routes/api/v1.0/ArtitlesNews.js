@@ -9,6 +9,7 @@ function showNews(req, res, next){
     const section=req.params.section;
 
 
+    // console.log(source,section)
    
     ModelArtitlesNews.find({ author:req.params.source, titleSection:req.params.section},(err, articles)=>{
 
@@ -20,6 +21,8 @@ function showNews(req, res, next){
         //         result=[ articles[i],...result,]
         //     }
         // }
+        // console.log(articles.length)
+        // if(err)console.log(err)
         res.send({articles})
 
     })

@@ -4,13 +4,15 @@ const scraper = require('./scraper')
 const Radio = require('../database/collections/radioNews')
 const Utils=require('../utils/removeAcentos')
 
+const SendPushNot= require('../push_notifications/send_all_user_push_notification')
+
 async function UpdateScraper(req, res) {
 
     // const { section='pais' } = req.params;
 
     const sections=['pais','mundo','economia','santa-cruz'];
     
-    for (let i = 0; i < sections.length; i++) {
+    for(let i = 0; i < sections.length; i++) {
         
         const data = await scraper.ScraperPuppeter(sections[i])
     
@@ -31,13 +33,13 @@ async function UpdateScraper(req, res) {
             })
     
     
-          await  ArticlesNews.findOne({title:data[j].title, titleSection:sections},(error,noticia)=>{
+          await  ArticlesNews.findOne({title:data[j].title,titleSection:sections[i]},(error,noticia)=>{
                     if(error){ console.log(`error en la buscada ${error}`) }
                     if(!noticia){ 
                         
                         news.save(  (err, respuesta)=>{
                             if(err){console.log(err)}
-                            console.log(respuesta.titleSection)
+                            console.log(respuesta.title)
                         })
                     }else{
                         console.log('la noticias ya existe')
@@ -48,6 +50,7 @@ async function UpdateScraper(req, res) {
 
     }
 
+    SendPushNot.SearchArtticleSendPushNot();   // funcion que envia las notificaciones a los suarios
     res.status(200).send({message: 'realizando scraping a el deber'})
 
 }

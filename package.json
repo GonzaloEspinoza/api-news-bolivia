@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "start2":"nodemon index.js"
+    "start2": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "firebase-admin": "^8.13.0",
     "mongoose": "^5.9.13",
     "morgan": "^1.10.0",
     "puppeteer": "^3.0.4",

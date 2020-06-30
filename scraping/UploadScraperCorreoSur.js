@@ -34,7 +34,7 @@ async function UpdateScraperCorreoSur(req, res) {
             })
     
     
-           await ArticlesNews.findOne({title:data[j].title},(error,noticia)=>{
+           await ArticlesNews.findOne({title:data[j].title,titleSection:sections[i]},(error,noticia)=>{
                     if(error){ console.log(`error en la buscada ${error}`) }
                     if(!noticia){ 
                         

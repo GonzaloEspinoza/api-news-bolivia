@@ -87,6 +87,16 @@ route.get('/api/info',InfoApi.infoApiResources)
 
 
 
+// ::::::Receibde token users:::::::::::::::
+const token = require('./token_Users_receive/token_Users');
+
+route.get('/user/new/token=:token',token.ReceiveTokenUser);
+
+// :::::::::::::::end::::::::::::::::::::::::
+
+
+
+
 
 // respuesta por defaul de al api-rest
 route.use('*',(req, res, next)=>{
