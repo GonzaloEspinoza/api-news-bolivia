@@ -3,10 +3,11 @@ const Article = require('../../../../database/collections/articlesNews');
 
 const NewArticle= async(req, res, next)=>{
 
-    // console.log(JSON.parse(req.body.articles))
+    console.log(JSON.parse(req.body.articles))
 
     var data =await JSON.parse(req.body.articles)
     // console.log(data.length)
+    
     if(data.length>0){
         for (let i = data.length-1; i>=0; i--) {
             var newData = new Article({
@@ -19,7 +20,7 @@ const NewArticle= async(req, res, next)=>{
                 publishedAt:data[i].publishedAt,
                 urlContend:data[i].urlContend,
                 source:{
-                        name:data[i].source,
+                        name:data[i].name,
                         url:data[i].url
                 }
             })
