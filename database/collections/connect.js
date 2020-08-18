@@ -7,7 +7,7 @@ const ScrapingAll = require('../../scraping/controllScraping/scraping_all_contro
 //            : 'mongodb+srv://gonzalo3:newspasswordmongodb@cluster0-dza4n.mongodb.net/test?retryWrites=true&w=majority'
 // docker-compose: 'mongodb://192.168.99.100:27017/NewsBoliviaDB'
 try {
-    mongoose.connect('mongodb+srv://gonzalo3:newspasswordmongodb@cluster0-dza4n.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology:true})
+    mongoose.connect('mongodb://192.168.99.100:27017/NewsBoliviaDB',{useNewUrlParser: true, useUnifiedTopology:true})
    
    .then( async()=>{
     console.log('conected database mongodb ok');

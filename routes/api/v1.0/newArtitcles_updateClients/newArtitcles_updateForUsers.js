@@ -3,7 +3,7 @@ const Article = require('../../../../database/collections/articlesNews');
 
 const NewArticle= async(req, res, next)=>{
 
-    console.log(JSON.parse(req.body.articles))
+    // console.log(JSON.parse(req.body.articles))
 
     var data =await JSON.parse(req.body.articles)
     // console.log(data.length)
@@ -28,7 +28,7 @@ const NewArticle= async(req, res, next)=>{
             const artitle = await Article.findOne({title:data[i].title, titleSection:data[i].titleSection}).exec();
             if(!artitle){
                 const saved = await newData.save();
-                if(!saved){
+                if(saved){
                     console.log('noticia nueva ->',saved.title)
                 }
                 
