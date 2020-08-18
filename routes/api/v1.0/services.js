@@ -89,11 +89,17 @@ route.get('/api/info',InfoApi.infoApiResources)
 
 // ::::::Receibde token users:::::::::::::::
 const token = require('./token_Users_receive/token_Users');
+const { Router } = require('express');
 
 route.get('/user/new/token=:token',token.ReceiveTokenUser);
-
 // :::::::::::::::end::::::::::::::::::::::::
 
+
+// METHOD PSOT::::::::.
+const NewAticle = require('./newArtitcles_updateClients/newArtitcles_updateForUsers');
+route.post('/new/article', NewAticle.NewArticle)
+
+// ::ned Mehtof POST:::::
 
 
 

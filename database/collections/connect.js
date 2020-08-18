@@ -1,4 +1,7 @@
+
+
 const mongoose = require('mongoose')
+const ScrapingAll = require('../../scraping/controllScraping/scraping_all_controll')
 
 // mongo atlas:  mongodb+srv://gonzalo3:<password>@cluster0-dza4n.mongodb.net/test?retryWrites=true&w=majority
 //            : 'mongodb+srv://gonzalo3:newspasswordmongodb@cluster0-dza4n.mongodb.net/test?retryWrites=true&w=majority'
@@ -6,8 +9,11 @@ const mongoose = require('mongoose')
 try {
     mongoose.connect('mongodb+srv://gonzalo3:newspasswordmongodb@cluster0-dza4n.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology:true})
    
-   .then(()=>{
-    console.log('conected database mongodb ok')
+   .then( async()=>{
+    console.log('conected database mongodb ok');
+    // await ScrapingAll.ControlScrapingEldeber();
+    // await ScrapingAll.ControlScrapingElPotosi();
+    // await ScrapingAll.ControlScrapingCorreoDelSur();
    }) 
     
 } catch (error) {

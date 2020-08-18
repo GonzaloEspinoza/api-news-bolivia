@@ -5,7 +5,7 @@ const Radio = require('../database/collections/radioNews')
 
 async function UpdateScraperCorreoSur(req, res) {
 
-    const parametre = req.params.section;
+    // const parametre = !req.params.section?'':req.params.section;
 
     // ArticlesNews.deleteMany({author:'correo del sur'},(err,datos)=>{
     //     if(err){console.log('dError al eliminar los datos')}

@@ -17,6 +17,14 @@ async function scrapingCorreoSur(str){
         await page.screenshot({path: 'correoDelSur.png'});
         const data=await page.evaluate(()=>{
 
+            var cantidadDeImagenes = [...document.querySelectorAll('.card-note.main-section img')].map(i=>i.src);
+            if(cantidadDeImagenes && cantidadDeImagenes.length>1){
+                document.querySelector('.card-note.main-section img').remove();
+            };
+            if(cantidadDeImagenes && cantidadDeImagenes.length==0){
+                document.querySelector('.card-note.main-section').remove();
+            };
+
 
             const titleSection = document.querySelectorAll('.section-name')[0].textContent.toLocaleLowerCase();
 
@@ -53,7 +61,7 @@ async function scrapingCorreoSur(str){
                     title:title[i],
                     titleSection:titleSection,
                     description:descriptions[i],
-                    urlImage:urlImage?urlImage[i].replace('_10','_840'):'',
+                    urlImage:urlImage[i]?urlImage[i].replace('_10','_840'):'',
                     sobre:titleSection,
                     publishedAt:dates[i],
                     urlContentDetail:urlContentDetail[i],

@@ -18,33 +18,31 @@ async function UpdateScraper(req, res) {
     
         for (let j = data.length-1 ; j>=0 ; j--) {
             
-            const news = await new ArticlesNews({
-                author:data[j].author,
-                title: data[j].title,
-                titleSection:Utils.removeAccents(data[j].titleSection),
-                country:'',
-                description:data[j].description,
-                urlImage: data[j].urlImage,
-                sobre: data[j].sobre,
-                publishedAt:data[j].publishedAt,
-                urlContendDetail:data[j].urlContend,
-                contenido:'',
-                source: data[j].source
-            })
-    
-    
-          await  ArticlesNews.findOne({title:data[j].title,titleSection:sections[i]},(error,noticia)=>{
-                    if(error){ console.log(`error en la buscada ${error}`) }
-                    if(!noticia){ 
-                        
-                        news.save(  (err, respuesta)=>{
-                            if(err){console.log(err)}
-                            console.log(respuesta.title)
-                        })
-                    }else{
-                        console.log('la noticias ya existe')
-                    }
-            })
+                const news = await new ArticlesNews({
+                    author:data[j].author,
+                    title: data[j].title,
+                    titleSection:Utils.removeAccents(data[j].titleSection),
+                    country:'',
+                    description:data[j].description,
+                    urlImage: data[j].urlImage,
+                    sobre: data[j].sobre,
+                    publishedAt:data[j].publishedAt,
+                    urlContendDetail:data[j].urlContend,
+                    contenido:'',
+                    source: data[j].source
+                })
+        
+        
+        const artitcle = await  ArticlesNews.findOne({title:data[j].title,titleSection:sections[i]}).exec();
+            
+            if(!artitcle){
+                const saved = await news.save();
+                if(!saved){
+                    console.log(saved.title)
+                }
+            }else{
+                console.log('Noticia existente');
+            }
             
         }
 
@@ -53,6 +51,7 @@ async function UpdateScraper(req, res) {
     SendPushNot.SearchArtticleSendPushNot();   // funcion que envia las notificaciones a los suarios
     res.status(200).send({message: 'realizando scraping a el deber'})
 
+    
 }
 
 // ScrapingEllDeberRadio

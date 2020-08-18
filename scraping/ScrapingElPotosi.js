@@ -22,6 +22,16 @@ function ScrapingElPotosi (str){
 
             let data = await page.evaluate(()=>{
 
+                var CantidadImag=[...document.querySelectorAll('.card-note.main-section  img')].map(i=>i.src);
+                
+                if(CantidadImag && CantidadImag.length>1){
+                    document.querySelector('.card-note.main-section img').remove();
+                }
+                if(CantidadImag && CantidadImag.length==0){
+                    document.querySelector('.card-note.main-section').remove();
+                }
+
+
                 const titles = [...document.querySelectorAll('.col-md-8 .card-note .title-note')].map((d,i)=>d.textContent);
                 const urlImages =[...document.querySelectorAll('.col-md-8 .card-note img')].map((d,i)=>d.src);
                 const urlDetail = [...document.querySelectorAll('.col-md-8 .card-note a')].map((d,i)=>d.href); 

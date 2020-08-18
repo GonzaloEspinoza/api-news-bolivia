@@ -12,7 +12,7 @@ const SearchArtticleSendPushNot= async()=>{
     const tokenUsers = new Array;
     const articles = await Artitles.find({author:'el deber', titleSection:'pais'})
                             .sort({createdDate:-1})
-                            .limit(1)
+                            .limit(6)
                             .exec();
     
     console.log(articles[0].title)
@@ -22,7 +22,10 @@ const SearchArtticleSendPushNot= async()=>{
     
     console.log(tokens)
     tokens.forEach(iten => {
-        SendAllPushNotification(iten.tokenUser,articles[0].title, articles[0].description, articles[0].urlImage)
+        // SendAllPushNotification(iten.tokenUser,articles[4].title, articles[4].description, articles[4].urlImage)
+        // SendAllPushNotification(iten.tokenUser,articles[3].title, articles[3].description, articles[3].urlImage)
+        SendAllPushNotification(iten.tokenUser,articles[2].title, articles[2].description, articles[2].urlImage)
+        SendAllPushNotification(iten.tokenUser,articles[1].title, articles[1].description, articles[1].urlImage)
     });
 
 }

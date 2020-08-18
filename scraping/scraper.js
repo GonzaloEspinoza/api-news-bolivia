@@ -36,8 +36,8 @@ const puppeteer = require('puppeteer')
                 ].map((d,i)=>d.querySelector('.loadingImage').dataset.image)
                 
                 const description = [
-                    ...document.querySelectorAll(".nota.linked .text")
-                ].map((d,i)=>d.querySelector('p').textContent)
+                    ...document.querySelectorAll(".nota.linked .text p")
+                ].map((d,i)=>d.textContent)
 
                 // sobre, ouede ser pais, departamento, u otro tema
                 const sobre = [

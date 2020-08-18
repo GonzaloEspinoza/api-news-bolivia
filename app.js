@@ -33,9 +33,14 @@ const uploadElPototis = require('./scraping/UploadScrapingElPotosi')
 // uploadElPototis.UploadScrapingElPotosi();
 
 // const firebase = require('./push_notifications/firebase_condig_push_Notification')
-// const pusNot = require('./push_notifications/send_all_user_push_notification')
+const pusNot = require('./push_notifications/send_all_user_push_notification')
 // // firebase.SendMessageFirebase();
 // pusNot.SearchArtticleSendPushNot();
+const eliminar=require('./routes/api/v1.0/deleteDuplicateArticles/searchAndDelete');
+eliminar.SearchArticles();
+
+
+
 
 app.listen(port,()=>{
     console.log(`server run on port: http://localhost:${port}`)
