@@ -1,5 +1,7 @@
 'use strict'
+const axios = require('axios');
 const Article = require('../../../../database/collections/articlesNews');
+const TokenUser = require('../../../../database/collections/token_Users');
 
 const NewArticle= async(req, res, next)=>{
 
@@ -18,7 +20,7 @@ const NewArticle= async(req, res, next)=>{
                 urlImage:data[i].urlImage,
                 sobre:data[i].sobre,
                 publishedAt:data[i].publishedAt,
-                urlContend:data[i].urlContend,
+                urlContendDetail:data[i].urlContend,
                 source:{
                         name:data[i].name,
                         url:data[i].url
@@ -29,7 +31,13 @@ const NewArticle= async(req, res, next)=>{
             if(!artitle){
                 const saved = await newData.save();
                 if(saved){
-                    console.log('noticia nueva ->',saved.title)
+                    console.log('noticia nueva ->',saved.title);
+                    const Tokens = await TokenUser.find({}).exec();
+                    if(Tokens.length==0)return null;
+                    Tokens.forEach(iten =>{saved.desciption,
+                        SendAllPushNotification(iten.tokenUser,saved.title, saved.desciption,saved.urlImage);
+                    })
+
                 }
                 
             }
@@ -45,6 +53,50 @@ const NewArticle= async(req, res, next)=>{
 }
 
 
+
+// function for send notification::::::::::::::::::::
+
+const SendAllPushNotification = ( tokenUser, title, desciption, urlImage ) => {
+    
+    const obj = {
+        to: tokenUser,
+        notification: {
+            title: title,
+            image: urlImage,
+            body: desciption,
+            color: 'red',
+        },
+        data: {
+            comida: "server noticias bolivai",
+            name: "hire data"
+            
+        }
+    };
+
+    var data = JSON.stringify(obj);
+
+    var config = {
+        method: 'post',
+        url: 'https://fcm.googleapis.com/fcm/send',
+        headers: {
+            'Authorization': 'key=AAAA75XbjC8:APA91bErhgAYtoP2nGa98schQys0v0zyyySV-fMNy7zOnEbowQvHXKTy9O-5R3RrSHz4GJKdDOkPgQ0Sg2gld4MZBHuswDZSqWsx2ZyKlmJrHtGqsmNti1ch2CZi6vRVn4OI2A1WO1yT',
+            'Content-Type': 'application/json'
+        },
+        data: data
+    };
+
+    axios(config)
+        .then(function (response) {
+            console.log(response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+
+
 module.exports = {
     NewArticle
 }
+
